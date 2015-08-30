@@ -13,3 +13,4 @@ Debates between modularity and distributed processing
 The first is the theory of modularity. Stemming from phrenology, this theory supports functional specialization, suggesting the brain has different modules that are domain specific in function. The second theory, distributive processing, proposes that the brain is more interactive and its regions are functionally interconnected rather than specialized.
   
   
+  
