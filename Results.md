@@ -2,8 +2,11 @@
 
 ## Correlation-Based Analyses
 
+We measured the similarity in patterns of brain responses to seeing different categories of stimuli (faces, letters, etc). Patterns of responses were examined in each anatomical region of the Harvard-Oxford cortical atlas and the activity in each region was compared between pairs of categories from different runs (odd or even) using the Pearson correlation.
 
+We found correlations between brain regions for the raw activity of each category suggests widespread similarity in the patterns. Since activity could be similar due to the fact that individuals were engaged in a task, we also used a general contrast of each category activity versus the activity of all other categories. And finally as a more rigorous alternative, we used partial correlations to examine the unique information shared between pairs of categories.
 
+--
 
 **Simple Classifiers**. We first wanted to see how well we could classify each visual category based on data from one set of the data. We applied this approach to the pearson correlations and then to the sparse inverse correlations using the adaptive lasso for the regularization (i.e., semi-partial correlation).
 
@@ -19,5 +22,6 @@
 
 
 
+  
   
   
