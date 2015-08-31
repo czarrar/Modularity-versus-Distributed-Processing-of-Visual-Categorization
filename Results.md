@@ -21,6 +21,16 @@ We found correlations between brain regions for the raw activity of each categor
 
 --
 
+## Multivariate Correlation-Based Analyses
+
+Now I want to replicate to some extent the analyses above using a more multivariate approach. In this case, I want to take into account all the trials. The question is if the pattern of activity across trials for each category can be discriminated. So this is like an MDMR style analysis although instead I need to fit a multinomial response. I'm now a bit unsure if this will really work.
+
+C = M
+
+The other idea of the distance-based approach was to reduce the computational demands. Also it would sort-of put all the regions in the same space. I could then apply the sparse group lasso. 
+
+--
+
 **Simple Classifiers**. We first wanted to see how well we could classify each visual category based on data from one set of the data. We applied this approach to the pearson correlations and then to the sparse inverse correlations using the adaptive lasso for the regularization (i.e., semi-partial correlation).
 
 **Amount of unique information**. For the semi-partial correlation, we can quantify how many of the elements are significantly non-zero across our 20 subjects and in particular focusing on the diagonal. We can also plot the diagonal information into one 4D file (and or plot it and save it to a file). Our goal would be to see if for any region there is a significant amount of unique information for a given category.
@@ -35,6 +45,7 @@ We found correlations between brain regions for the raw activity of each categor
 
 
 
+  
   
   
   
