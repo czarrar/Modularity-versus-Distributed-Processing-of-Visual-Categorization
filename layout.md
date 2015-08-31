@@ -1,2 +1,2 @@
 Introduction.md
-Methods_Correlations_test__.md
+Methods.md
