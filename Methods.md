@@ -9,7 +9,7 @@ Twenty right-handed, healthy adults (X females, age range Y-Z years, mean X year
 
 ## Stimuli
 
-360 stimuli were generated: circles, faces, fruits, letters, objects, and vehicles...
+336 stimuli were generated: circles, faces, fruits, letters, objects, and vehicles...
 
 ## Procedure
 
@@ -23,9 +23,18 @@ Image preprocessing was performed using custom scripts (http://github.com/HumanN
 
 ## fMRI Data Analysis
 
-### Brain Activity
+### Univariate Brain Activity
 
-Univariate analyses provided ?. Whole-brain voxel-wise regression analyses were performed at the subject-level using AFNI’s 3dDeconvolve and 3dREMLfit functions, which provide temporal pre-whitening via an autoregressive model. The linear model consisted of six explanatory variables for trials associated with faces, fruits, letter strings, objects, vehicles, or circles (the target). All variables were modeled as boxcar functions, where a value of 1 was assigned to time-points when a non-scrambled stimulus was on the screen (0.5-s per trial) and a value of 0 to time-points when the face was not on the screen, and then convolved with a double-gamma function (AFNI’s SPMG1). Regressors of no interest included baseline effects of each run and 6 head movement parameters. Contrasts were defined to identity brain regions that showed increased activity when viewing each stimuli versus the average activity for all other stimuli. Following individual analyses, whole-brain group analysis was performed using AFNI’s 3dMEMA (Chen et al. 2012), a program that incorporates individual beta precision estimates into group effects using a mixed-effects meta-analytic approach. Clusters were defined as contiguous sets of voxels with Z > 1.96 and then thresholded using Gaussian random field theory (cluster probability p < 0.05) to correct for multiple comparisons (Worsley et al. 1996).
+[We first conducted univariate analyses to examine if voxelwise brain activity for each category overlapped supported a distributed process or were distinct supporting a modular process.] Whole-brain voxel-wise regression analyses were performed at the subject-level using AFNI’s 3dDeconvolve and 3dREMLfit functions, which provide temporal pre-whitening via an autoregressive model. The linear model consisted of six explanatory variables for trials associated with faces, fruits, letter strings, objects, vehicles, or circles (the target). All variables were modeled as boxcar functions, where a value of 1 was assigned to time-points when a non-scrambled stimulus was on the screen (0.5-s per trial) and a value of 0 to time-points when the face was not on the screen, and then convolved with a double-gamma function (AFNI’s SPMG1). Regressors of no interest included baseline effects of each run and 6 head movement parameters. Contrasts were defined to identity brain regions that showed increased activity when viewing each stimuli versus the average activity for all other stimuli. Following individual analyses, whole-brain group analysis was performed using AFNI’s 3dMEMA (Chen et al. 2012), a program that incorporates individual beta precision estimates into group effects using a mixed-effects meta-analytic approach. Clusters were defined as contiguous sets of voxels with Z > 1.96 and then thresholded using Gaussian random field theory (cluster probability p < 0.05) to correct for multiple comparisons (Worsley et al. 1996). We conducted these analyses for activity across all the runs as well as the even runs and odd runs.
+
+## Correlation of Brain Activity Patterns
+
+[note that the stimuli in the odd versus even runs were different and so any similarity would be a bigger deal and not just about reprodicible of the same item, but reprodicibility of the category information]
+
+We compared the similarity of brain activity patterns between pairs of the same category or pairs of different categories using the adaptive lasso. In each pair, one activity pattern was always from the odd run and the other activity pattern was always from the even run (e.g., face-odd vs. face-even or face-odd vs. letter-even). In this way, the correlation between pairs of activity patterns from different runs represents the amount of reproducible activity related to a visual category from one run to another. Such an approach has been shown to better account for stimulus-driven similarities rather than intrinsic fluctuations of a particular event (cite). We compared patterns of brain activity within anatomical regions-of-interest (ROI) taken from the Harvard-Oxford anatomical atlas (25% probability; 96 regions). Since the correlation between pairs of activity patterns can be driven by low-level effects (e.g., edges in the stimuli) and information may not be unique or could be explained better by another category, we used the adaptive lasso that allowed us to correlate pairs of brain activity while controlling for all other category patterns (cite). In this way, the correlation reflected the amount of unique information between the pair of stimuli that could not be explained by activity in any other category. Consequently, any presence of correlation in a category not typically selective for an ROI such as correlation in letter-string activity would suggest information for letter-string activity... We conducted this measure for each subject as well as for the group. Signal for the group-level consisted of temporally concatenating the single-subject data and then conducting the adaptive lasso analysis. We estimated the significance for each comparison by testing if the single-subject estimates differed from zero using the non-parametric Mann-Whitney test (*p* < 0.05).
+
+[note: focused our analyses on the ventral visual cortex, using functional parcellations. then explain how the functional parcellations were created...basically based on the Blumensath approach]
+
 
 ## Correlations
 
@@ -39,6 +48,7 @@ Univariate analyses provided ?. Whole-brain voxel-wise regression analyses were 
 - Calculate the partial correlation
 - Plot the diagonal of the partial correlation
 - Cluster the partial correlations? Or maybe just do some type of correlation between matrices.
+  
   
   
   
