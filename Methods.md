@@ -32,24 +32,3 @@ Image preprocessing was performed using custom scripts (http://github.com/HumanN
 We measured category information in anatomical regions-of-interest (ROI) while removing any effects of other categories. Specifically, we compared the similarity of brain activity patterns between pairs of the same category or pairs of different categories using the adaptive lasso in ROIs taken from the Harvard-Oxford anatomical atlas (25% probability). For each pair of correlations, one activity pattern was always from an odd run and the other activity pattern was always from an even run. In comparing activity between independent runs, we were able to measure the stimulus-driven information in category-specific brain activity while ignoring any intrinsic fluctuations in brain signal related to particular runs (cite). By using the adaptive lasso in our correlations, we were additionally able to calculate a correlation between pairs of brain activity that controlled for activity patterns found in the other four categories (cite). Consequently, the correlation from the adaptive lasso reflected the amount of unique information between a pair of stimuli that could not be explained by activity in any other category. For our analyses, the most relevant correlations were those between the same category (e.g., face activity during odd runs versus face activity during even runs). Any correlations from the adaptive lasso between the same category would suggest the presence of unique information for that category in the given anatomical ROI. We measured correlations for each subject. Group-level correlations were determined by concatenating each subject’s pattern of brain activity for each category. Significance of the correlations was estimated by comparing the distribution of subject-level correlation values for each pair of activity patterns to zero using the non-parametric Mann-Whitney test (*p* < 0.05).
 
 [note: focused our analyses on the ventral visual cortex, using functional parcellations. then explain how the functional parcellations were created...based on the Blumensath approach]
-
-
-## Correlations
-
-**Simple Classifiers**. We first wanted to see how well we could classify each visual category based on data from one set of the data. We applied this approach to the pearson correlations and then to the sparse inverse correlations using the adaptive lasso for the regularization (i.e., semi-partial correlation).
-
-**Amount of unique information**. For the semi-partial correlation, we can quantify how many of the elements are significantly non-zero across our 20 subjects and in particular focusing on the diagonal. We can also plot the diagonal information into one 4D file (and or plot it and save it to a file). Our goal would be to see if for any region there is a significant amount of unique information for a given category.
-
-**Relation of semi-partial correlations across regions**. Here, we want to show that the pattern of relationships between the categories is not unique across the cortex. Instead there appear to be X clusters.
-
-- Calculate the correlation
-- Calculate the partial correlation
-- Plot the diagonal of the partial correlation
-- Cluster the partial correlations? Or maybe just do some type of correlation between matrices.
-  
-  
-  
-  
-  
-  
-  
