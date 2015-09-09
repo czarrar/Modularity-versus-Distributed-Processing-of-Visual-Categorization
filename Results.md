@@ -4,6 +4,24 @@
 
 We measured the similarity in patterns of brain responses to seeing different categories of stimuli (faces, letters, etc). Patterns of responses were examined in each anatomical region of the Harvard-Oxford cortical atlas and the activity in each region was compared between pairs of categories from different runs (odd or even) using the Pearson correlation.
 
+- We first examined the amount of information present in each category. 
+    - As can be seen in the thresh figure:
+    - we found X regions that had significant within ...
+    - Highest correlation for each category was ...
+    - Regions that had at least 4 categories with unique information in each category were found in 7 regions: list (make figure of regions found in each category). Also generate the detailed matrix plot of those regions to show. Might make all the plots but only for supplementary materials.
+
+Can have a table that shows each region with:
+    - Number of significant same category
+    - Number of significant off diagonal
+    - Values for each of the same category
+    - Maximum value for the off-diagonal
+
+I'm also debating about making a plot showing a simple classification with the diagonal versus the off-diagonal.
+
+Taken together, I should be showing that faces are both spread throughout the brain and also especially localized in certain areas. Strong representation of information for the other categories isn't seen for the other categories.
+
+It might be useful looking at the distance matrix and finding the appropriate (and reproducible) clusters. We might expect that for vehicles, the clustering splits the data into some additional categories. Actually, I could even figure this out with MDMR, by grouping the stimuli in some useful way.
+
 ### Plot All Data
 
 1. We plot all the data. What is it that we observe? It appears that there is often confusion between xyz and across the brain faces have the most reproducible pattern. Furthermore, only certain brain regions in ventral visual cortex observe widespread detection of various categories.
@@ -28,6 +46,7 @@ Now I want to replicate to some extent the analyses above using a more multivari
 C = M
 
 The other idea of the distance-based approach was to reduce the computational demands. Also it would sort-of put all the regions in the same space. I could then apply the sparse group lasso. 
+  
   
   
   
