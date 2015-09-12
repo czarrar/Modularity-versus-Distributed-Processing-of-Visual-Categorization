@@ -1,8 +1,6 @@
 
 # Methods
 
-These data were previously published in XYZ.
-
 ## Participants
 
 Twenty right-handed, healthy adults (X females, age range Y-Z years, mean X years) participated in the study. All had normal or corrected-to-normal vision and no history of neurological or psychiatric illnesses. The protocol was approved by the Duke Human Investigation Committee, and informed consent was obtained for all participants. 
@@ -34,3 +32,29 @@ We measured category information based on patterns of brain activity in anatomic
 We measured correlations for each subject. Group-level correlations were based on concatenating each subject’s pattern of brain activity for each category. Significance of the correlations was estimated by comparing the distribution of subject-level correlation values for each pair of activity patterns to zero using the non-parametric Mann-Whitney test (*p* < 0.05). 
 
 We repeated the adaptive lasso correlations on functional parcellations of ventral visual areas. With these functional parcels, we aim to have more accurate ROIs that better respect boundaries between distinct brain regions. The parcels were generated using a prior region growing approach where we find representative seed time-courses of an area and grow those seed voxels into functionally homogenous regions (Blumensath et al., 2013).
+
+### RV Coefficient
+
+- Aim to measure the similarity of the spatial patterns in different brain regions for each of the categories.
+
+### Sparse Group Lasso
+
+In our adaptive lasso (correlation) analyses, patterns of activity unique to a category could be redundant and repeat across brain areas. Here, we account for any redundant category information found across brain areas by using the multinomial sparse group lasso (cite). In one model, we identify the minimal number of regions (i.e., those anatomical regions with unique category information) that best predict the category of brain activation patterns. These classification analyses will be done for each subject and will use the pattern of activation for each individual trial or beta-series.
+
+For computational efficiency, we first reduce the dimensionality of each anatomical region’s voxelwise data to a subset of the top principal components. We determined the top components using a parallel analysis (cite). We compared the eigenvalue of each component to the corresponding eigenvalue generated from random uncorrelated standardized normal variables . A total of 100 random sets of eigenvalues were generated. Each of the original eigenvalues was compared to each random distribution of eigenvalues for that component to obtain a p-value. Any components with p < 0.05 were kept. Thus, each ROI was initially a beta-series matrix of T trials x V voxels and after the dimensionality reduction, it was a matrix of T trials x P components where T = 300 trials.
+
+- so this section, should be about running the lasso on each subject for each area separately and then using a permutation test to figure out if we should keep the region or not. this could be second…to see if those that were kept by the one model was more meaningful than running it separately. 
+- then talk about running the model together. i’m not sure what actual details that I want to be giving here. I can explain the group part and goal to select regions. i probably should find imaging uses of it.
+
+The problem that I’m facing with this stuff is that how do I do that final testing. I suppose the simplest way is to do the permutation testing but it takes forever. I could reduce the amount of time taken for the analysis by reducing the number of alphas and lambdas?
+
+Ugh I also keep forgetting bout this registration issue…
+
+Drasgow, F. and Lissak, R. (1983) Modified parallel analysis: a procedure for examining the latent dimensionality of dichotomously scored item responses. Journal of Applied Psychology, 68(3), 363-373.
+Hoyle, R. H. and Duvall, J. L. (2004). Determining the number of factors in exploratory and con- firmatory factor analysis. In D. Kaplan (Ed.): The Sage handbook of quantitative methodology for the social sciences. Thousand Oaks, CA: Sage.
+Horn, J. L. (1965). A rationale and test of the number of factors in factor analysis. Psychometrika, 30, 179-185.
+
+## Notes
+
+- Look at haxby dataset
+- split our data in half and use half data that is most similar in each category (versus most dissimilar) and compare performance for those two halves.
