@@ -44,17 +44,8 @@ In our adaptive lasso (correlation) analyses, patterns of activity unique to a c
 *Data Reduction.* For computational efficiency, we first reduce the dimensionality of each anatomical region’s voxelwise data to a subset of the top principal components. We determined those top components by comparing the eigenvalue of each component to a null distribution of eigenvalues generated from random uncorrelated data (cite). A total of 100 random sets of eigenvalues were generated. Principal components were kept if their eigenvalues were larger than 95% of the random eigenvalues (i.e., _p_ < 0.05). After obtaining the top components for each ROI, we combined those components together creating a matrix of T (trials) x P (components) where T = 300 trials and P = the total number of components across all ROIs.
 [Do I need to state that the number of components will vary between regions?]
 
-*Multinomial Sparse Group-Lasso.* 
+*Multinomial Sparse Group-Lasso.* Our classification approach uses patterns of brain activity to predict the category of visual stimuli in each trial for each subject. The goal is to identify the subset of anatomical regions that contain unique information in best predicting category membership. Each anatomical region is multivariate and contains the top principal components of the voxelwise brain activity in that region. Separate parameters of the data are estimated for each category in a multinomial logistic regression model, which generalizes the logistic regression to multi-class problems (cite). The model is fit using a sparse group lasso that removes redundant or unimportant groups (i.e., anatomical regions) and within important groups removes unimportant features (i.e., principal components of voxelwise data) (cite). Thus, in the sparse group lasso, the relevant components in an anatomical region are retained or discarded together. The best parameters and group/feature subset are selected by using a leave-one run out cross-validation. On each fold, data from 270 trials of each region’s top components are used to train the model and data from the remaining 30 trials are used for testing. The average classification accuracy for each trial and the average percent of anatomical regions retained by the model is calculated across all folds. We used the implementation of the multinomial sparse group lasso found in the R package msgl (cite).
 
-- Predict the category of the visual stimuli on each trial based on the pattern of brain activity in the PCA reduced dataset. 
-- To minimize bias, we used a leave-one run out procedure training on data from nine runs (270 trials) and testing on data from one run (30 trials), repeated 10 times.
-- Multinomial part implies that the model fits a parameter for each category but does group those parameters together (? like does it only fit something if the other parameter doesn’t have a good fit ?).
-- Sparse Group-Lasso. It will select the most predictive anatomical regions (the group-lasso element) as well as the most predictive components within each anatomical region (the sparse element). Consequently, any anatomical regions and principal components within anatomical regions that do not increase the predictive accuracy of each items category membership (i.e., that are redundant) will be removed. 
-- It uses a penalty on the groups which in this case are the anatomical regions. Regions that are correlated will be dropped. This is similar to having a predictor in one univariate model with covariates, if the covariates are correlated with the predictor variable then the fit of the predictor to the response might be reduced since it can be explained by the covariates. In this multivariate case, each predictor is a multivariate signal (several principal components of the brain activity in that region) and so the group-lasso can help penalize each predictor groups fit on the response.
-- I guess it actually will penalize individual components as well as the groups and so any individual component will be removed from the model.
-- We include the intercept parameters as well in the model
-
-We apply our multinomial sparse group lasso to the TxP data matrix for each subject trying to predict the category label for each trial using a leave-one run out procedure. 
 
 
 
@@ -65,7 +56,6 @@ As a baseline measure, we conduct classification analyses independently on each 
 
 The problem that I’m facing with this stuff is that how do I do that final testing. I suppose the simplest way is to do the permutation testing but it takes forever. I could reduce the amount of time taken for the analysis by reducing the number of alphas and lambdas?
 
-Ugh I also keep forgetting bout this registration issue…
 
 Drasgow, F. and Lissak, R. (1983) Modified parallel analysis: a procedure for examining the latent dimensionality of dichotomously scored item responses. Journal of Applied Psychology, 68(3), 363-373.
 Hoyle, R. H. and Duvall, J. L. (2004). Determining the number of factors in exploratory and con- firmatory factor analysis. In D. Kaplan (Ed.): The Sage handbook of quantitative methodology for the social sciences. Thousand Oaks, CA: Sage.
