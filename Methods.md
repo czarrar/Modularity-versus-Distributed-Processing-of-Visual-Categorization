@@ -37,6 +37,12 @@ We repeated the adaptive lasso correlations on functional parcellations of ventr
 
 - Aim to measure the similarity of the spatial patterns in different brain regions for each of the categories.
 
+- https://en.wikipedia.org/wiki/RV_coefficient
+- https://www.researchgate.net/publication/252531898_RV-coefficient_and_its_significance_test_in_mapping_brain_functional_connectivity
+- http://www.sciencedirect.com/science/article/pii/S105381190300507X
+- http://www.sciencedirect.com/science/article/pii/S1053811906007105
+- http://www.sciencedirect.com/science/article/pii/S1053811910013431
+
 ### Classification of Brain Activity Patterns
 
 In our adaptive lasso (correlation) analyses, patterns of activity unique to a category could be redundant and repeat across brain areas. Here, we account for any redundant category information found across brain areas by using the multinomial sparse group lasso (cite). In one model, we identify the minimal number of regions (i.e., those anatomical regions with unique category information) that best predict the category of brain activation patterns. These classification analyses will be done for each subject and will use the pattern of activation for each individual trial or beta-series.
@@ -46,7 +52,7 @@ In our adaptive lasso (correlation) analyses, patterns of activity unique to a c
 
 *Multinomial Sparse Group-Lasso.* Our classification approach uses patterns of brain activity to predict the category of visual stimuli in each trial for each subject. The goal is to identify the subset of anatomical regions that contain unique information in best predicting category membership. Each anatomical region is multivariate and contains the top principal components of the voxelwise brain activity in that region. Separate parameters of the data are estimated for each category in a multinomial logistic regression model, which generalizes the logistic regression to multi-class problems (cite). The model is fit using a sparse group lasso that removes redundant or unimportant groups (i.e., anatomical regions) and within important groups removes unimportant features (i.e., principal components of voxelwise data) (cite). Thus, in the sparse group lasso, the relevant components in an anatomical region are retained or discarded together. The best parameters and group/feature subset are selected by using a leave-one run out cross-validation. On each fold, data from 270 trials of each region’s top components are used to train the model and data from the remaining 30 trials are used for testing. The average classification accuracy for each trial and the average percent of anatomical regions retained by the model is calculated across all folds. We used the implementation of the multinomial sparse group lasso found in the R package msgl (cite).
 
-
+Also should mention that use a permutation test to get the baseline levels of classification accuracy for each of the categories. Can also look at individual region beta-weights to see what the contribution is from each region.
 
 
 As a baseline measure, we conduct classification analyses independently on each region.
